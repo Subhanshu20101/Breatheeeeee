@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body
+    class="bg-violet-100 p-0 m-0"
+    style="font-family: 'Saira Semi Condensed'"
+  >
+    {% if user_logged_in %} {% include 'base.html' %}
+    <div class="w-4/5 mt-10 m-auto overflow-hidden">
+      <form action="/predict" method="post" enctype="multipart/form-data">
+        <div
+          class="w-full text-3xl font-semibold flex justify-start mb-4 text-teal-900"
+        >
+          <p>Upload an audio file</p>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-10">
+          <div class="flex flex-col lg:w-10/12">
+            <div class="flex items-center justify-start w-full mb-5">
+              <label
+                class="flex flex-col items-center justify-center w-full h-56 border-2 border-gray-500 border-dashed rounded-lg cursor-pointer bg-zinc-50 hover:bg-zinc-100"
+                for="dropzone-file"
+              >
+                <div
+                  class="flex flex-col items-center justify-center pt-5 pb-6"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="w-10 h-10 mb-3 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+                  <p class="mb-2 text-md text-gray-600 dark:text-gray-400">
+                    <span class="font-semibold">Click to upload</span>
+                    or drag and drop
+                  </p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Supported Formats: WAV
+                  </p>
+                </div>
+
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  name="audio"
+                  class="hidden"
+                />
+              </label>
+            </div>
+          </div>
+          <div
+            class="flex lg:flex-col lg:w-2/12 gap-16 items-center justify-center"
+          >
+            <div class="justify-start">
+              <input
+                class="bg-green-600 hover:bg-teal-900 text-white w-40 font-bold py-4 px-8 rounded"
+                type="submit"
+                value="Predict"
+              />
+            </div>
+
+            <button
+              class="bg-green-600 hover:bg-teal-900 transition duration-200 text-white w-40 font-bold py-4 px-8 rounded"
+            >
+              <a href="{{ url_for('home') }}">Back to Home</a>
+            </button>
+          </div>
+        </div>
+        {% if error_text %}
+        <div class="justify-start">
+          <p class="text-red-700 font-semibold mb-2">{{ error_text }}</p>
+        </div>
+        {% endif %}
+      </form>
+    </div>
+
+    {% include 'footer.html' %} {% else %} {% include 'login.html' %} {% endif
+    %}
+  </body>
+</html>

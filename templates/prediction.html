@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prediction</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-violet-100 p-0 m-0" style="font-family: 'Saira Semi Condensed'">
+  {% include 'base.html' %}
+  <div class="w-4/5 my-10 m-auto overflow-hidden">
+    <div class="flex mb-4">
+      <div class="w-5/12">
+        <p class="text-5xl text-violet-900 font-bold mb-4">Prediction :</p>
+
+        {% if prediction_text == "No Breathing Pattern Found" %}
+        <p class="text-3xl font-medium mb-4">
+          <span class="text-3xl text-purple-600">{{ "Invalid Audio Uploaded" }}</span>
+        </p>
+        {% endif %}
+
+        {% if prediction_text == "Healthy" %}
+        <p class="text-3xl font-medium mb-4">
+          <span class="text-3xl text-purple-600">{{ prediction_text }}</span>
+        </p>
+
+        {% else %}
+        <p class="text-3xl font-medium mb-4">
+          <span class="text-3xl text-red-700">{{ prediction_text }}</span>
+          <!-- <span class="text-3xl text-red-700">{{ prediction_confidence }}</span> -->
+        </p>
+        <p class="text-3xl font-medium mb-4"></p>
+        <span class="text-3xl text-red-700">{{"Confidence Score : " + prediction_confidence }}</span>
+        </p>
+        {% endif %}
+        <p class="text-4xl text-violet-900 font-bold mb-4"></p>
+
+        {% if prediction_text == "Healthy" %} {% else %}
+        <p class="text-3xl font-medium mb-4"></p>
+        {% endif %}
+      </div>
+
+      <div class="w-7/12 flex flex-col gap-16 m-8">
+        {% if prediction_text == "Bronchiectasis" %} {%
+        include"bronchiectasis.html" %} {% endif %} {% if prediction_text ==
+        "Bronchiolitis" %} {% include "bronchiolitis.html" %} {%endif %} {% if
+        prediction_text == "COPD" %} {% include "copd.html" %} {% endif %} {%
+        if prediction_text == "Pneumonia" %} {% include "pneumonia.html" %} {%
+        endif %} {%if prediction_text == "URTI" %} {% include "urti.html" %}
+        {% endif %}
+      </div>
+    </div>
+
+    <button
+      class="bg-purple-600 hover:bg-violet-900 transition duration-200 text-white w-40 font-bold py-2 px-4 rounded">
+      <a href="{{ url_for('index') }}">Back to Home</a>
+    </button>
+  </div>
+
+  {% include 'footer.html' %}
+</body>
+
+</html>
