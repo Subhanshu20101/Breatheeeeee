@@ -11,7 +11,7 @@ import random
 app = Flask(__name__)
 audio = None
 # app.secret_key = os.environ['SESSION_SECRET_KEY']
-app.secret_key = "chuss"
+app.secret_key = "APGD-3e23675784y86"
 db = sqlite3.connect('database.db', check_same_thread=False)
 cursor = db.cursor()
 
