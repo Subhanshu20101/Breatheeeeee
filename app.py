@@ -141,7 +141,7 @@ def predict():
         model = load_model('models/custom_model.h5')
         test_pred = model.predict(features)
         class_pred = classes[np.argmax(test_pred)]
-        confidence = test_pred.max() - random.uniform(0.04, 0.06)
+        confidence = test_pred.max()
 
         output = [class_pred, confidence]
 
